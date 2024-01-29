@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Detalle del Proyecto: {{ detalle.nombre }}</h1>
+    
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Proyecto: {{ detalle.nombre }}</h5>
+        <p class="card-text">Descripción: {{ detalle.descripcion }}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tareas del Proyecto</h5>
+        
+        {% if detalle.tarea_set.all %}
+          <ul class="list-group">
+            {% for tarea in detalle.tarea_set.all %}
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>{{ tarea.titulo }}</span>
+                  <div class="btn-group">
+                    <a href="{% url 'tarea_app:Detalle de Tarea' tarea.id %}" class="btn btn-info btn-sm">Detalles</a>
+                    <a href="{% url 'tarea_app:Modificar Tarea' tarea.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'tarea_app:Eliminar Tarea' tarea.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                  </div>
+                </div>
+                <ul class="list-group mt-2">
+                  <li class="list-group-item">Responsable: {{ tarea.asignado_a }}</li>
+                  <li class="list-group-item">Estado: {{ tarea.estado }}</li>
+                </ul>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No hay tareas en este proyecto.</p>
+        {% endif %}
+        
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="{% url 'tarea_app:Crear Tarea' %}" class="btn btn-primary">Crear Tarea</a>
+    </div>
+  </div>
+{% endblock content %}
+    

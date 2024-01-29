@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <h2>Bienvenido a la Página de Inicio</h2>
+  {% if user.is_authenticated %}
+    <p>Hola, {{ user.username }}. <a href="{% url 'usuario_app:Logout de usuario' %}">Cerrar Sesión</a></p>
+  {% else %}
+    <p><a href="{% url 'usuario_app:Login de usuario' %}">Iniciar Sesión</a></p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>{{ tarea.titulo }}</h2>
+    <p>{{ tarea.descripcion }}</p>
+    <p>Fecha de Vencimiento: {{ tarea.fecha_vencimiento }}</p>
+    <p>Estado: {{ tarea.estado }}</p>
+    <p>Proyecto: {{ tarea.proyecto }}</p>
+    <p>Categoría: {% for categoria in tarea.categoria.all %}{{ categoria.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p>Asignado a: {{ tarea.asignado_a }}</p>
+  </div>
+{% endblock %}

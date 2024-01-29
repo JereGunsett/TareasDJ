@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Listado de Tareas</h2>
+    <ul class="list-group">
+      {% for tarea in tareas %}
+        <li class="list-group-item"><a href="{% url 'tarea_app:Detalle de Tarea' pk=tarea.pk %}">{{ tarea.titulo }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

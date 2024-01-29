@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST">{% csrf_token %}
+        <h2>Desea eliminar el registro?</h2>
+        <input type="submit" name="confirmation" value="Si">
+        <a href="{% url 'proyecto_app:Lista de Proyecto' %}"><button type="button">No</button></a>
+    </form>
+{% endblock content %}
+    

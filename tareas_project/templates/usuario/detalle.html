@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Detalle de Usuario</h1>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Información del Usuario</h5>
+
+        <dl class="row">
+          <dt class="col-sm-3">Username:</dt>
+          <dd class="col-sm-9">{{ usuario.username }}</dd>
+
+          <dt class="col-sm-3">Email:</dt>
+          <dd class="col-sm-9">{{ usuario.email }}</dd>
+
+          <dt class="col-sm-3">Nombre:</dt>
+          <dd class="col-sm-9">{{ usuario.first_name }}</dd>
+
+          <dt class="col-sm-3">Apellido:</dt>
+          <dd class="col-sm-9">{{ usuario.last_name }}</dd>
+
+          <dt class="col-sm-3">Fecha de Registro:</dt>
+          <dd class="col-sm-9">{{ usuario.fecha_registro }}</dd>
+
+          <dt class="col-sm-3">Última Conexión:</dt>
+          <dd class="col-sm-9">{{ usuario.ultima_conexion }}</dd>
+
+          <dt class="col-sm-3">Proyectos:</dt>
+          <dd class="col-sm-9">
+            {% if usuario.proyectos_con_permisos.all %}
+              <ul>
+                {% for proyecto in usuario.proyectos_con_permisos.all %}
+                  <li>{{ proyecto.nombre }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No pertenece a ningún proyecto.</p>
+            {% endif %}
+          </dd>
+        </dl>
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">Avatar</h5>
+        {% if usuario.avatar %}
+          <img src="{{ usuario.avatar.url }}" alt="{{ usuario.username }} Avatar" class="img-fluid rounded" style="max-width: 200px; max-height: 200px;">
+        {% else %}
+          <p>No hay avatar asociado.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="{% url 'usuario_app:Lista de usuario' %}" class="btn btn-secondary">Volver a la Lista de Usuarios</a>
+    </div>
+  </div>
+{% endblock content %}
