@@ -1,12 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.admin.models import LogEntry
 
-# Create your models here.
 class Usuario(AbstractUser):
 
+    #TODO: Parametros de Usuario 
     #Campos username, password, nombre, apellido y email se encuentran en el modelo AbstractUser
-    
     avatar = models.ImageField('Avatar', upload_to='Usuario', height_field=None, width_field=None, max_length=None, blank=True)
     fecha_registro = models.DateTimeField('Fecha de Registro', auto_now_add=True)
     ultima_conexion = models.DateTimeField('Última Conexión', auto_now=True)
@@ -18,7 +16,7 @@ class Usuario(AbstractUser):
         verbose_name_plural = ("Usuarios")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.username}"
+        return f"{self.first_name} {self.last_name}"
     
 
     def save(self, *args, **kwargs):
@@ -26,3 +24,9 @@ class Usuario(AbstractUser):
         if not self.avatar:
             self.avatar = self.DEFAULT_AVATAR_PATH
         super().save(*args, **kwargs)
+
+    def get_proyectos(self):
+        return self.proyectos_con_permisos.all()
+
+    def get_tareas_pendientes(self):
+        return models.ForeignKey('tarea.Tarea', on_delete=models.SET_NULL, null=True, blank=True)

@@ -1,8 +1,12 @@
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from applications.proyecto.models import Proyecto
+from applications.tarea.models import Tarea
 from django.views.generic import (
     ListView,
     DetailView,
@@ -27,8 +31,8 @@ class UsuarioDetailView(DetailView):
 
 class RegistroView(CreateView):
     form_class = UsuarioRegistroForm  # formulario de registro
-    template_name = 'usuario/registro.html'  # ruta a la plantilla de registro
-    success_url = reverse_lazy('login')  
+    template_name = 'usuario/registro.html'
+    success_url = reverse_lazy('usuario_app:Lista de usuario')  # ruta a la plantilla de registro
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -91,3 +95,40 @@ class UsuarioDeleteView(DeleteView):
     model = Usuario
     template_name = "usuario/eliminar.html"
     success_url = reverse_lazy('usuario_app:Lista de usuario')
+
+@login_required
+def inicio_usuario(request):
+    # Obtener las tareas pendientes y proyectos del usuario
+    tareas_pendientes = Tarea.objects.filter(usuario_asignado=request.user, estado='pendiente')
+    proyectos = request.user.get_proyectos()
+
+
+    print(f"Tareas Pendientes: {tareas_pendientes}")
+    print(f"Proyectos: {proyectos}")
+
+    return render(request, 'inicio.html', {'tareas_pendientes': tareas_pendientes, 'proyectos': proyectos})
+
+def inicio(request):
+    if request.user.is_authenticated:
+        usuario = request.user
+        proyectos = usuario.proyectos_con_permisos.all()
+        tareas_pendientes = Tarea.objects.filter(usuario_asignado=usuario, estado='pendiente')
+        return render(request, 'inicio.html', {'proyectos': proyectos, 'tareas_pendientes': tareas_pendientes})
+    else:
+        return render(request, 'inicio.html')
+
+class UsuarioPasswordResetView(PasswordResetView):
+    template_name = 'usuario/password_reset.html'
+    email_template_name = 'usuario/password_reset_email.html'
+    subject_template_name = 'usuario/password_reset_subject.txt'
+    success_url = reverse_lazy('password_reset_done')
+
+class UsuarioPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'usuario/password_reset_done.html'
+
+class UsuarioPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'usuario/password_reset_confirm.html'
+    success_url = reverse_lazy('password_reset_complete')
+
+class UsuarioPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'usuario/password_reset_complete.html'

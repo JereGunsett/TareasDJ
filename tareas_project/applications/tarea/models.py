@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 from applications.categoria.models import Categoria
 from applications.proyecto.models import Proyecto
 
@@ -20,7 +19,7 @@ class Tarea(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
     proyecto = models.ForeignKey(Proyecto, on_delete=models.SET_NULL, null=True, blank=True)
     categoria = models.ManyToManyField(Categoria)
-    asignado_a = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    usuario_asignado = models.ForeignKey('usuario.Usuario', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = "Tarea"

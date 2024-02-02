@@ -1,9 +1,6 @@
-from functools import partial
-from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
 from .models import Proyecto
 from .forms import ProyectoForm
-from django.shortcuts import render
 from django.views.generic import (
     ListView,
     DetailView,
@@ -12,12 +9,6 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-
-# def usuario_puede_ver_proyecto(usuario, id_proyecto):
-#     # Lógica para determinar si el usuario puede ver el proyecto
-#     return usuario.is_superuser or usuario.proyectos_con_permisos.filter(id=id_proyecto).exists()
-
-# usuario_puede_ver_proyecto_requerido = partial(user_passes_test, usuario_puede_ver_proyecto)
 
 class Inicio(TemplateView):
     template_name = 'inicio.html'
@@ -42,7 +33,7 @@ class BuscarProyectoListView(ListView):
         )
         return lista
     
-# @usuario_puede_ver_proyecto_requerido
+
 class DetalleProyectoListView(DetailView):
     model = Proyecto
     template_name = "proyecto/detalle.html"

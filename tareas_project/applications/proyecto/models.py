@@ -1,12 +1,12 @@
 from django.db import models
-from django.conf import settings
+from applications.usuario.models import Usuario
 
 class Proyecto(models.Model):
 
     ESTADO_CHOICES = [
-        ('activo', 'Activo'),
-        ('detenido ', 'Detenido'),
-        ('finalizado', 'Finalizado'),
+        ('Activo', 'Activo'),
+        ('Detenido ', 'Detenido'),
+        ('Finalizado', 'Finalizado'),
     ]
 
     # TODO: Parametros de Proyecto
@@ -15,8 +15,8 @@ class Proyecto(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(null=True, blank=True)
-    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='activo')
-    usuarios_con_permisos = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='proyectos_con_permisos', blank=True)
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='Activo')
+    usuarios_con_permisos = models.ManyToManyField(Usuario, related_name='proyectos_con_permisos', blank=True)
 
     class Meta:
         verbose_name = "Proyecto"

@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+from applications.usuario.models import Usuario
 from .models import Tarea
 from applications.proyecto.models import Proyecto
 from django.contrib.auth import get_user_model
@@ -8,11 +9,12 @@ from django_select2.forms import ModelSelect2Widget
 class UsuarioSelect2Widget(ModelSelect2Widget):
     model = get_user_model()
     search_fields = ['username__icontains', 'first_name__icontains', 'last_name__icontains']
+    queryset = Usuario.objects.filter(is_active=True)
 
 class TareaForm(forms.ModelForm):
     class Meta:
         model = Tarea
-        fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'estado', 'proyecto', 'categoria', 'asignado_a']
+        fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'estado', 'proyecto', 'categoria', 'usuario_asignado']
 
     def __init__(self, *args, **kwargs):
         super(TareaForm, self).__init__(*args, **kwargs)
@@ -24,8 +26,9 @@ class TareaForm(forms.ModelForm):
         self.fields['proyecto'].queryset = Proyecto.objects.all()
 
         # Utilizar el widget de Select2 para el campo asignado_a
-        self.fields['asignado_a'].widget = UsuarioSelect2Widget(
-            attrs={'style': 'width: 100%;', 'data-minimum-input-length': 1}
+        self.fields['usuario_asignado'] = forms.ModelChoiceField(
+            queryset=Usuario.objects.filter(is_active=True),
+            empty_label='(Seleccionar Usuario)',
         )
 
         # Utilizar el widget de calendario para el campo fecha_vencimiento

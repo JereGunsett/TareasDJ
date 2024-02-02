@@ -2,10 +2,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Iniciar Sesión</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Iniciar Sesión</button>
-  </form>
-{% endblock %}
+
+<div class="container mt-4">
+
+    <form method="post" class="p-4 bg-light rounded shadow">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'usuario_app:Reinicio de Contraseña' %}" class="text-muted">¿Olvidaste tu contraseña?</a>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

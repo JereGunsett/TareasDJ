@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Modificacion de Proyecto</h1>
-    
-<form method="POST">{% csrf_token %}
+<div class="container mt-4">
 
-    {{ form.as_p }}
-    <input type="submit" value="Gurdar">
+  <h1 class="text-center mb-4">Modificación de Proyecto</h1>
 
-</form>
+  <form method="POST" class="p-4 bg-light rounded shadow">
+      {% csrf_token %}
+
+      {{ form.as_p }}
+
+      <div class="text-center">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <a href="{% url 'proyecto_app:Lista de Proyecto' %}" class="btn btn-link">Cancelar</a>
+      </div>
+  </form>
+</div>
 {% endblock content %}

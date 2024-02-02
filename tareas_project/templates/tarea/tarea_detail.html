@@ -2,12 +2,23 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h2>{{ tarea.titulo }}</h2>
-    <p>{{ tarea.descripcion }}</p>
-    <p>Fecha de Vencimiento: {{ tarea.fecha_vencimiento }}</p>
-    <p>Estado: {{ tarea.estado }}</p>
-    <p>Proyecto: {{ tarea.proyecto }}</p>
-    <p>Categoría: {% for categoria in tarea.categoria.all %}{{ categoria.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-    <p>Asignado a: {{ tarea.asignado_a }}</p>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">{{ tarea.titulo }}</h2>
+        <p class="card-text">{{ tarea.descripcion }}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Fecha de Vencimiento:</strong> {{ tarea.fecha_vencimiento }}</li>
+          <li class="list-group-item"><strong>Estado:</strong> {{ tarea.estado }}</li>
+          <li class="list-group-item"><strong>Proyecto:</strong> {{ tarea.proyecto }}</li>
+          <li class="list-group-item">
+            <strong>Categoría:</strong>
+            {% for categoria in tarea.categoria.all %}
+              {{ categoria.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </li>
+          <li class="list-group-item"><strong>Asignado a:</strong> {{ tarea.usuario_asignado }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 {% endblock %}

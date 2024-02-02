@@ -32,7 +32,6 @@ class TareaUpdateView(LoginRequiredMixin, UpdateView):
     model = Tarea
     form_class = TareaForm
     template_name = 'tarea/tarea_form.html'
-    # fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'estado', 'proyecto', 'categoria', 'asignado_a']
     success_url = reverse_lazy('tarea_app:Lista de Tarea')
 
 class TareaDeleteView(LoginRequiredMixin, DeleteView):

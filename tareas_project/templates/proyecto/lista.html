@@ -5,7 +5,10 @@
 <div class="container">
     <h1 class="mt-4 mb-4">Lista de Proyectos</h1>
 
-    <a href="{% url 'proyecto_app:Alta de Proyecto' %}" class="btn btn-success mb-2">Crear Proyecto</a>
+    {% if user.is_authenticated and user.is_superuser %} #Si el usuario es super puede crear proyecto
+    <a href="{% url 'proyecto_app:Alta de Proyecto' %}" class="btn btn-success mb-2">Crear Proyecto</a>    
+    {% endif %}
+        
 
     <table class="table">
         <thead>

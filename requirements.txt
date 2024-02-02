@@ -2,3 +2,5 @@ django==3.2
 psycopg2-binary
 djangorestframework
 Pillow
+django-select2
+django-autocomplete-light

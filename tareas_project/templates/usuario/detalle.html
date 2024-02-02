@@ -6,7 +6,8 @@
 
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Información del Usuario</h5>
+        <h5 class="card-title" style="padding-bottom: 20px;">Información del Usuario</h5>
+        <a href="{% url 'usuario_app:Modificar usuario' usuario.id %}" class="btn btn-primary" role="button" style="margin-bottom: 20px;">Modificar usuario</a>
 
         <dl class="row">
           <dt class="col-sm-3">Username:</dt>
