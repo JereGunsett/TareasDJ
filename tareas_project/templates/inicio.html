@@ -1,35 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container mt-4">
+  <div class="container-fluid p-4 bg-light"> <div class="row">
+      <div class="col-md-6">
         {% if user.is_authenticated %}
-            <h1 style="padding-bottom: 40px;">Bienvenido, {{ user.username }}!</h1>
-
-            <h2>Tus Tareas Pendientes:</h2>
-            <ul>
-                {% if tareas_pendientes %}
-                    {% for tarea in tareas_pendientes %}
-                        <li>{{ tarea.titulo }} - {{ tarea.proyecto.nombre }}</li>
-                    {% endfor %}
-                {% else %}
-                    <li>No tienes tareas pendientes.</li>
-                {% endif %}
-            </ul>
-
-            <h2>Tus Proyectos:</h2>
-            <ul>
-                {% if user.is_authenticated %}
-                <ul>
-                    {% for proyecto in user.proyectos_con_permisos.all %}
-                        <li><a href="{% url 'proyecto_app:Detalle del Proyecto' proyecto.id %}">{{ proyecto.nombre }}</a></li>
-                    {% endfor %}
-                {% else %}
-                    <li>No estás participando en ningún proyecto.</li>
-                {% endif %}
-            </ul>
+          <h1 class="display-4">¡Bienvenido de nuevo, {{ user.username }}!</h1>
+          <p class="lead">Aquí encontrarás tus tareas pendientes y proyectos en curso.</p>
         {% else %}
-            <h1>Bienvenido a TareasProject</h1>
-            <p>Para comenzar <a href="{% url 'usuario_app:Alta de usuario' %}">Regístrate</a> o <a href="{% url 'usuario_app:Login de usuario' %}">inicia sesión</a></p>
+          <h1 class="display-4">¡Organiza tus tareas como nunca antes!</h1>
+          <p class="lead">TareasProject te ayuda a gestionar tus proyectos y tareas de forma simple y eficiente.</p>
+          <a href="{% url 'usuario_app:Alta de usuario' %}" class="btn btn-primary btn-lg">Regístrate gratis</a>
         {% endif %}
+      </div>
+      <div class="col-md-6">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="../media/gestion_de_tareas.jpg" class="d-block w-100" alt="Imagen de gestión de tareas">
+            </div>
+            <div class="carousel-item">
+              <img src="../media/gestion_de_tareas2.jpg" class="d-block w-100" alt="Imagen de gestión de tareas 2">
+            </div>
+            <div class="carousel-item">
+              <img src="../media/gestion_de_tareas3.jpg" class="d-block w-100" alt="Imagen de gestión de tareas 3">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </a>
+        </div>
+      </div>
     </div>
+
+    <h1 class="display-4">¡Organiza tus tareas como nunca antes!</h1>
+    <p class="lead">TareasProject te ayuda a gestionar tus proyectos y tareas de forma simple y eficiente.</p>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Crea tareas y proyectos con facilidad.</li>
+        <li class="list-group-item">Asigna tareas a otros usuarios.</li>
+        <li class="list-group-item">Sigue el progreso de tus proyectos.</li>
+        <li class="list-group-item">Recibe notificaciones de nuevas tareas y mensajes.</li>
+    </ul>
+
+    {% if user.is_authenticated %}
+      <div class="row mt-4">
+        <div class="col-6">
+          <h2>Tus tareas pendientes:</h2>
+          <ul class="list-group">
+            {% if tareas_pendientes %}
+              {% for tarea in tareas_pendientes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ tarea.titulo }} - {{ tarea.proyecto.nombre }}
+                  <span class="badge bg-primary rounded-pill">Pendiente</span>
+                </li>
+              {% endfor %}
+            {% else %}
+              <li class="list-group-item">¡No tienes tareas pendientes! ¡Felicidades!</li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-6">
+          <h2>Tus proyectos:</h2>
+          <ul class="list-group">
+          {% if user.proyectos_con_permisos.all %}
+            {% for proyecto in user.proyectos_con_permisos.all %}
+            <li class="list-group-item"><a href="{% url 'proyecto_app:Detalle del Proyecto' proyecto.id %}">{{ proyecto.nombre }}</a></li>
+            {% endfor %}
+          {% else %}
+            <li class="list-group-item">Todavía no estás participando en ningún proyecto.</li>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+    
 {% endblock content %}
+    

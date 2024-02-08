@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid p-4 bg-light">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Contacto</h1>
+        <p>
+          Si tienes alguna pregunta o comentario, no dudes en contactarnos. 
+          Rellena el siguiente formulario y nos pondremos en contacto contigo lo antes posible.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form action="{% url 'home_app:enviar_mensaje' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="correo_electronico">Correo electrónico:</label>
+            <input type="email" name="correo_electronico" id="correo_electronico" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="asunto">Asunto:</label>
+            <input type="text" name="asunto" id="asunto" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje:</label>
+            <textarea name="mensaje" id="mensaje" class="form-control" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

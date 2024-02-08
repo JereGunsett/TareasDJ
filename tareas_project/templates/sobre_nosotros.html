@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid p-4 bg-light">
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Quiénes somos</h1>
+        <p>
+          **Tecnologías Innovadoras S.A.** fue fundada en 2015 con la misión de revolucionar la industria tecnológica. 
+          Nos apasiona la innovación y nos esforzamos por crear soluciones tecnológicas vanguardistas que transformen la forma en que vivimos y trabajamos.
+        </p>
+        <p>
+          Nuestros valores fundamentales son:
+        </p>
+        <ul>
+          <li>Innovación constante</li>
+          <li>Compromiso con la excelencia</li>
+          <li>Colaboración y trabajo en equipo</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h2>Nuestro equipo</h2>
+        <div class="row">
+          <div class="col-sm-4">
+            <img src="../media/default_avatar.png" class="img-fluid rounded-circle" alt="John Doe">
+            <h3 class="text-center">John Doe</h3>
+            <p class="text-center">Director de Tecnología</p>
+          </div>
+          <div class="col-sm-4">
+            <img src="../media/default_avatar.png" class="img-fluid rounded-circle" alt="Jane Smith">
+            <h3 class="text-center">Jane Smith</h3>
+            <p class="text-center">Ingeniera de Software</p>
+          </div>
+          <div class="col-sm-4">
+            <img src="../media/default_avatar.png" class="img-fluid rounded-circle" alt="Bob Johnson">
+            <h3 class="text-center">Bob Johnson</h3>
+            <p class="text-center">Diseñador UX/UI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h2>Nuestra trayectoria</h2>
+        <ul class="timeline">
+          <li>
+            <div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Lanzamiento de la primera aplicación móvil</h4>
+                <p class="timeline-date"><small>2016</small></p>
+              </div>
+              <div class="timeline-body">
+                <p>Un hito importante en nuestra historia, marcando el comienzo de nuestra presencia en el mercado de aplicaciones móviles.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Expansión a mercados internacionales</h4>
+                <p class="timeline-date"><small>2018</small></p>
+              </div>
+              <div class="timeline-body">
+                <p>Establecimos asociaciones estratégicas y expandimos nuestra presencia a nivel internacional.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <h4 class="timeline-title">Lanzamiento de la plataforma de inteligencia artificial</h4>
+                <p class="timeline-date"><small>2020</small></p>
+              </div>
+              <div class="timeline-body">
+                <p>Un logro significativo al incorporar tecnologías de vanguardia para ofrecer soluciones basadas en inteligencia artificial.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

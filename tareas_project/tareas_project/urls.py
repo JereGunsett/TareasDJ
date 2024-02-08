@@ -30,7 +30,9 @@ urlpatterns = [
     re_path('proyecto/', include('applications.proyecto.urls')),
     re_path('usuario/', include('applications.usuario.urls')),
     re_path('tarea/', include('applications.tarea.urls')),
+    re_path('home/', include('applications.home.urls')),
     path('select2/', include('django_select2.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + staticfiles_urlpatterns()
 
 

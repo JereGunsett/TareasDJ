@@ -37,13 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_select2',
+    'django_select2', #Biblioteca para que en el widget ejecutar busqueda en seleccion
     'applications.categoria',
     'applications.comentario',
     'applications.notificacion',
     'applications.proyecto',
     'applications.tarea',
     'applications.usuario',
+    'applications.home',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Configuración para django-select2
 SELECT2_JS = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js'
 SELECT2_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css'
+
+
+# Configuración para usar el servidor SMTP de Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''  
+EMAIL_HOST_PASSWORD = ''
