@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from applications.categoria.models import Categoria
 from applications.proyecto.models import Proyecto
@@ -20,6 +21,7 @@ class Tarea(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.SET_NULL, null=True, blank=True)
     categoria = models.ManyToManyField(Categoria)
     usuario_asignado = models.ForeignKey('usuario.Usuario', on_delete=models.SET_NULL, null=True, blank=True)
+    comentarios = models.ManyToManyField('comentario.Comentario', related_name='comentarios')
 
     class Meta:
         verbose_name = "Tarea"

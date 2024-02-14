@@ -18,6 +18,32 @@
           </li>
           <li class="list-group-item"><strong>Asignado a:</strong> {{ tarea.usuario_asignado }}</li>
         </ul>
+        
+        <h3>Comentarios</h3>
+        <div class="comment-list">
+          {% if comentarios %}
+            {% for comentario in comentarios %}
+              <div class="comment">
+                <p><strong>{{ comentario.autor.username }}</strong></p>
+                <p>{{ comentario.contenido }}</p>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="alert alert-info">
+              {{ mensaje_no_comentarios }}
+            </div>
+          {% endif %}
+        </div>
+
+        <h3>Agregar Comentario</h3>
+        <form id="comment-form" action="{% url 'comentario_app:crear_comentario' pk=tarea.pk %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="comentario">Comentario:</label>
+            <textarea name="contenido" id="comentario" class="form-control" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
       </div>
     </div>
   </div>

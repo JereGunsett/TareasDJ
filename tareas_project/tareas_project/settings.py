@@ -154,9 +154,9 @@ SELECT2_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/s
 
 
 # Configuración para usar el servidor SMTP de Gmail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ''  
-EMAIL_HOST_PASSWORD = ''
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = ''  
+# EMAIL_HOST_PASSWORD = ''

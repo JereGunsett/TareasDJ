@@ -1,12 +1,11 @@
 from django.db import models
 from django.conf import settings
-from applications.tarea.models import Tarea
 
 class Comentario(models.Model):
 
     # TODO: Parametros de Comentario
-    tarea = models.ForeignKey(Tarea, on_delete=models.CASCADE)
-    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tarea = models.ForeignKey('tarea.Tarea', on_delete=models.CASCADE, related_name='tarea_comentarios')
+    autor = models.ForeignKey('usuario.Usuario', on_delete=models.SET_NULL, null=True, blank=True)
     contenido = models.TextField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
 

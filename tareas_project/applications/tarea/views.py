@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Tarea
 from .forms import TareaForm
+from applications.comentario.forms import ComentarioForm
 
 
 class TareaListView(LoginRequiredMixin, ListView):
@@ -16,6 +17,20 @@ class TareaDetailView(LoginRequiredMixin, DetailView):
     model = Tarea
     template_name = 'tarea/tarea_detail.html'
     context_object_name = 'tarea'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.object is not None:
+            context['comentarios'] = self.object.tarea_comentarios.all().order_by('-fecha_creacion')
+        else:
+            context['mensaje_no_comentarios'] = "Esta tarea no tiene comentarios."
+        context['form_comentario'] = ComentarioForm()
+
+        # Mensaje informativo si no hay comentarios
+        if not context['comentarios']:
+            context['mensaje_no_comentarios'] = "Esta tarea no tiene comentarios."
+
+        return context
 
 class TareaCreateView(LoginRequiredMixin, CreateView):
     model = Tarea
