@@ -21,7 +21,7 @@ class Tarea(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete=models.SET_NULL, null=True, blank=True)
     categoria = models.ManyToManyField(Categoria)
     usuario_asignado = models.ForeignKey('usuario.Usuario', on_delete=models.SET_NULL, null=True, blank=True)
-    comentarios = models.ManyToManyField('comentario.Comentario', related_name='comentarios')
+    comentarios = models.ManyToManyField('comentario.Comentario', related_name='comentarios', null=True, blank=True)
 
     class Meta:
         verbose_name = "Tarea"

@@ -1,10 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Registro de Usuario</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
-  </form>
+<div class="container mt-5">
+    <h2 class="mb-4">Registro de Usuario</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+        <div class="mb-3">
+            {{ form.confirm_password.label_tag }}
+            {{ form.confirm_password }}
+        </div>
+        <div class="mb-3">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+        </div>
+        <div class="mb-3">
+            {{ form.last_name.label_tag }}
+            {{ form.last_name }}
+        </div>
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            {{ form.avatar.label_tag }}
+            {{ form.avatar }}
+        </div>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+    </form>
+</div>
 {% endblock content %}

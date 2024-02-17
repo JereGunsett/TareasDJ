@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated and user.is_superuser %}
   <div class="container mt-4">
     <h1 class="mb-4">Lista de Usuarios</h1>
 
@@ -33,4 +34,14 @@
       </tbody>
     </table>
   </div>
+{% else %}
+  <div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h1 class="alert-heading">Ops! No puedes estar aquí.</h1>
+        <p>Esta página está prohibida. Por favor, contacta con el administrador para obtener más información.</p>
+        <hr>
+        <p class="mb-0">Si eres el administrador, asegúrate de haber iniciado sesión con la cuenta adecuada.</p>
+    </div>
+  </div>
+{% endif %}
 {% endblock content %}

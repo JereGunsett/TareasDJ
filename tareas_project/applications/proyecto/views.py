@@ -20,6 +20,14 @@ class ProyectoListView(ListView):
     ordering = 'nombre'
     context_object_name = 'proyectos'
 
+    def get_queryset(self):
+            palabra_clave = self.request.GET.get('kword','')
+            lista = Proyecto.objects.filter(
+                nombre__icontains = palabra_clave
+            )
+            return lista
+    
+
 class BuscarProyectoListView(ListView):
     model = Proyecto
     template_name = "proyecto/buscar.html"

@@ -35,7 +35,7 @@
           {% endif %}
         </div>
 
-        <h3>Agregar Comentario</h3>
+        <h3>Comentarios</h3>
         <form id="comment-form" action="{% url 'comentario_app:crear_comentario' pk=tarea.pk %}" method="post">
           {% csrf_token %}
           <div class="form-group">

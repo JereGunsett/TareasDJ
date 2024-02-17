@@ -27,14 +27,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',Inicio.as_view(), name='inicio'),
     path('admin/', admin.site.urls),
+    path('select2/', include('django_select2.urls')),
     re_path('proyecto/', include('applications.proyecto.urls')),
     re_path('usuario/', include('applications.usuario.urls')),
     re_path('tarea/', include('applications.tarea.urls')),
     re_path('home/', include('applications.home.urls')),
     re_path('comentario/', include('applications.comentario.urls')),
-    path('select2/', include('django_select2.urls')),
-    
+    re_path('categoria/', include('applications.categoria.urls')), 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) + staticfiles_urlpatterns()
-
-
-# urlpatterns += staticfiles_urlpatterns()

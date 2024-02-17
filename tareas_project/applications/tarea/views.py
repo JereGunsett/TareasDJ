@@ -13,6 +13,13 @@ class TareaListView(LoginRequiredMixin, ListView):
     context_object_name = 'tareas'
     ordering = ['-fecha_creacion']
 
+    def get_queryset(self):
+            palabra_clave = self.request.GET.get('kword','')
+            lista = Tarea.objects.filter(
+                titulo__icontains = palabra_clave
+            )
+            return lista
+
 class TareaDetailView(LoginRequiredMixin, DetailView):
     model = Tarea
     template_name = 'tarea/tarea_detail.html'

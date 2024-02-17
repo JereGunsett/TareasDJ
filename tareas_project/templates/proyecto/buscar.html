@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<form method="GET">
-    <input type="text" placeholder="Nombre" id="kword" name="kword">
-    <input type="submit" valor="Buscar">
-</form>
-<ul>
+<div class="container mt-4">
+    <form method="GET" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Nombre" id="kword" name="kword">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
     
-    {% for proyecto in proyectos %}
-        <li>{{proyecto.nombre}} -> {{proyecto.estado}}</li>
-    {% endfor %}
-        
-</ul>
-
+    <ul class="list-group">
+        {% for proyecto in proyectos %}
+            <a href="{% url 'proyecto_app:Detalle del Proyecto' proyecto.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ proyecto.nombre }}
+                <span class="badge bg-secondary">{{ proyecto.estado }}</span>
+            </a>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock content %}
     

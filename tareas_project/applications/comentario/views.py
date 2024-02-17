@@ -1,6 +1,6 @@
 from django.apps import apps
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from .models import Comentario
 from .forms import ComentarioForm

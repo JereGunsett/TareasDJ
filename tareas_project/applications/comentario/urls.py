@@ -8,5 +8,5 @@ urlpatterns = [
         "crear/<pk>",
         ComentarioCreateView.as_view(),
         name="crear_comentario"
-    ),
+    ),    
 ]

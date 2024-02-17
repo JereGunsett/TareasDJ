@@ -1,12 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container mt-4">
+<div class="container mt-4">
     <h2>Listado de Tareas</h2>
-    <ul class="list-group">
-      {% for tarea in tareas %}
-        <li class="list-group-item"><a href="{% url 'tarea_app:Detalle de Tarea' pk=tarea.pk %}">{{ tarea.titulo }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <a href="{% url 'tarea_app:Crear Tarea' %}" class="btn btn-success">Crear Tarea</a>    
+        </div>
+        <div class="col-md-6">
+            <form method="GET" class="input-group">
+                <input type="text" class="form-control" placeholder="Nombre" id="kword" name="kword">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha de Creación</th>
+                <th scope="col">Fecha de Vencimiento</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Proyecto</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Usuario Asignado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tarea in tareas %}
+                <tr>
+                    <td><a href="{% url 'tarea_app:Detalle de Tarea' pk=tarea.pk %}">{{ tarea.titulo }}</a></td>
+                    <td>{{ tarea.descripcion }}</td>
+                    <td>{{ tarea.fecha_creacion }}</td>
+                    <td>{{ tarea.fecha_vencimiento }}</td>
+                    <td>{{ tarea.estado }}</td>
+                    <td>{{ tarea.proyecto }}</td>
+                    <td>
+                        {% for categoria in tarea.categoria.all %}
+                            {{ categoria.nombre }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ tarea.usuario_asignado }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
