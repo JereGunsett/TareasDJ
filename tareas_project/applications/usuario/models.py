@@ -29,4 +29,4 @@ class Usuario(AbstractUser):
         return self.proyectos_con_permisos.all()
 
     def get_tareas_pendientes(self):
-        return models.ForeignKey('tarea.Tarea', on_delete=models.SET_NULL, null=True, blank=True)
+        return self.tarea_set.filter(estado='pendiente')

@@ -51,8 +51,8 @@
         <div class="col-6">
           <h2>Tus tareas pendientes:</h2>
           <ul class="list-group">
-            {% if tareas_pendientes %}
-              {% for tarea in tareas_pendientes %}
+            {% if user.get_tareas_pendientes %}
+              {% for tarea in user.get_tareas_pendientes %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   {{ tarea.titulo }} - {{ tarea.proyecto.nombre }}
                   <span class="badge bg-primary rounded-pill">Pendiente</span>

@@ -46,8 +46,14 @@ class TareaCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('tarea_app:Lista de Tarea')
 
     def form_valid(self, form):
+        print("Formulario válido")
+        if form.is_valid():
+            print("El formulario es válido")
+        else:
+            print("Errores en el formulario:", form.errors)
         body_tarea = form.save(commit=False)
         body_tarea.save()
+        print("Tarea guardada:", body_tarea)
         return super(TareaCreateView, self).form_valid(form)
 
 class TareaUpdateView(LoginRequiredMixin, UpdateView):

@@ -22,12 +22,12 @@
             <tr>
                 <th scope="col">Título</th>
                 <th scope="col">Descripción</th>
-                <th scope="col">Fecha de Creación</th>
                 <th scope="col">Fecha de Vencimiento</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Proyecto</th>
                 <th scope="col">Categoría</th>
                 <th scope="col">Usuario Asignado</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,6 @@
                 <tr>
                     <td><a href="{% url 'tarea_app:Detalle de Tarea' pk=tarea.pk %}">{{ tarea.titulo }}</a></td>
                     <td>{{ tarea.descripcion }}</td>
-                    <td>{{ tarea.fecha_creacion }}</td>
                     <td>{{ tarea.fecha_vencimiento }}</td>
                     <td>{{ tarea.estado }}</td>
                     <td>{{ tarea.proyecto }}</td>
@@ -45,6 +44,10 @@
                         {% endfor %}
                     </td>
                     <td>{{ tarea.usuario_asignado }}</td>
+                    <td>
+                        <a href="{% url 'tarea_app:Modificar Tarea' pk=tarea.pk %}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a href="{% url 'tarea_app:Eliminar Tarea' pk=tarea.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -14,22 +14,19 @@ class UsuarioSelect2Widget(ModelSelect2Widget):
 class TareaForm(forms.ModelForm):
     class Meta:
         model = Tarea
-        fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'estado', 'proyecto', 'categoria', 'usuario_asignado']
+        fields = ['titulo', 'descripcion', 'fecha_vencimiento', 'proyecto', 'categoria', 'usuario_asignado']
 
     def __init__(self, *args, **kwargs):
         super(TareaForm, self).__init__(*args, **kwargs)
-        
+
         # Establecer la fecha de vencimiento predeterminada a 7 días desde hoy
         self.fields['fecha_vencimiento'].initial = timezone.now() + timezone.timedelta(days=7)
-        
+
         # Filtrar los proyectos disponibles para la tarea
         self.fields['proyecto'].queryset = Proyecto.objects.all()
 
-        # Utilizar el widget de Select2 para el campo asignado_a
-        self.fields['usuario_asignado'] = forms.ModelChoiceField(
-            queryset=Usuario.objects.filter(is_active=True),
-            empty_label='(Seleccionar Usuario)',
-        )
+        self.fields['usuario_asignado'].queryset = Usuario.objects.filter(is_active=True)
+        self.fields['usuario_asignado'].empty_label = '(Seleccionar Usuario)'
 
         # Utilizar el widget de calendario para el campo fecha_vencimiento
         self.fields['fecha_vencimiento'].widget = forms.TextInput(
