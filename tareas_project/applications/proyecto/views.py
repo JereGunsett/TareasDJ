@@ -1,4 +1,6 @@
 from django.urls import reverse_lazy
+from rest_framework.generics import ListAPIView
+from applications.proyecto.serializer import ProyectoSerializer
 from .models import Proyecto
 from .forms import ProyectoForm
 from django.views.generic import (
@@ -13,7 +15,6 @@ from django.views.generic import (
 class Inicio(TemplateView):
     template_name = 'inicio.html'
 
-
 class ProyectoListView(ListView):
     model = Proyecto
     template_name = "proyecto/lista.html"
@@ -25,8 +26,7 @@ class ProyectoListView(ListView):
             lista = Proyecto.objects.filter(
                 nombre__icontains = palabra_clave
             )
-            return lista
-    
+            return lista 
 
 class BuscarProyectoListView(ListView):
     model = Proyecto
@@ -40,13 +40,11 @@ class BuscarProyectoListView(ListView):
             nombre__icontains = palabra_clave
         )
         return lista
-    
 
 class DetalleProyectoListView(DetailView):
     model = Proyecto
     template_name = "proyecto/detalle.html"
     context_object_name = 'detalle'
-
 
 class ProyectoCreateView(CreateView):
     model = Proyecto
@@ -58,7 +56,6 @@ class ProyectoCreateView(CreateView):
         body_proyecto = form.save(commit=False)
         body_proyecto.save()
         return super(ProyectoCreateView, self).form_valid(form)
-    
 
 class ProyectoUpdateView(UpdateView):
     model = Proyecto
@@ -71,8 +68,16 @@ class ProyectoUpdateView(UpdateView):
         body_proyecto.save()
         return super(ProyectoUpdateView, self).form_valid(form)
 
-
 class ProyectoDeleteView(DeleteView):
     model = Proyecto
     template_name = "proyecto/eliminar.html"
     success_url = reverse_lazy('proyecto_app:Lista de Proyecto')
+
+class ProyectoListApiView(ListAPIView):
+    context_object_name = "lista"
+    serializer_class = ProyectoSerializer
+    template_name = "proyecto/apilista.html"
+
+    def get_queryset(self):
+        return Proyecto.objects.all()
+    

@@ -35,6 +35,11 @@ urlpatterns = [
         "eliminar/<pk>",
         views.ProyectoDeleteView.as_view(),
         name="Eliminar Proyecto"
+    ),
+    path(
+        "lista/api",
+        views.ProyectoListApiView.as_view(),
+        name="Lista API"
     )
     
 ]
